@@ -9,6 +9,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Web", "src\Web\Web.csproj", "{0671E984-D389-4E83-9457-1C9AD81251C5}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Robot.AppStore.iTunes", "src\Robot.AppStore.iTunes\Robot.AppStore.iTunes.csproj", "{EA0C87ED-4A41-4B6D-8A42-3C9812B7EFC6}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -19,11 +21,16 @@ Global
 		{0671E984-D389-4E83-9457-1C9AD81251C5}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{0671E984-D389-4E83-9457-1C9AD81251C5}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{0671E984-D389-4E83-9457-1C9AD81251C5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{EA0C87ED-4A41-4B6D-8A42-3C9812B7EFC6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EA0C87ED-4A41-4B6D-8A42-3C9812B7EFC6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EA0C87ED-4A41-4B6D-8A42-3C9812B7EFC6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EA0C87ED-4A41-4B6D-8A42-3C9812B7EFC6}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{0671E984-D389-4E83-9457-1C9AD81251C5} = {CD56A2A3-D3C4-4344-8E3D-804BA4E80BA7}
+		{EA0C87ED-4A41-4B6D-8A42-3C9812B7EFC6} = {CD56A2A3-D3C4-4344-8E3D-804BA4E80BA7}
 	EndGlobalSection
 EndGlobal
