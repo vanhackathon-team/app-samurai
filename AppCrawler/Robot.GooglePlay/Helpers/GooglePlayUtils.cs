@@ -13,7 +13,16 @@ namespace Robot.GooglePlay.Helpers
             if (rating == string.Empty)
                 return string.Empty;
             else
-                return rating.Split(':')[1].Replace("%", "").Replace(";", "");
+                return FixRating(rating.Split(':')[1].Replace("%", "").Replace(";", ""));
         }
+
+        private static string FixRating(string rating) {
+
+            double result = Convert.ToDouble(rating);
+            result = Math.Round((result * 5) / 100, 1);
+
+            return result.ToString();
+        }
+
     }
 }

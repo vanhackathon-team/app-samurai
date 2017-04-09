@@ -57,24 +57,20 @@ namespace WebApp.Controllers
             if(p == string.Empty || ( p != "g" && p != "a"))
                 return View();
 
-            ISearchApp searchApp;
+            IGetApp app;
 
             if (p == "g")
-                searchApp = new Robot
-                    .GooglePlay.SearchApp.SearchAppByName
-                    (new Robot.GooglePlay.SearchApp.SearchAppByLink(null));
+                app = new Robot.GooglePlay.GetApp.GetApp();
             else
-                searchApp = new Robot
-                    .AppStore.iTunes.SearchApp.SearchAppByName
-                    (new Robot.AppStore.iTunes.SearchApp.SearchAppByLink(null));
-
-            IEnumerable<App> searchResult = searchApp.Search(q, c);
+                app = new Robot.AppStore.iTunes.GetApp.GetApp();
+            
+            app.Get(q, c);
 
             ViewBag.p = p;
             ViewBag.q = q;
             ViewBag.c = c;
             
-            return View(searchResult);
+            return View(app);
         }
     }
 }
