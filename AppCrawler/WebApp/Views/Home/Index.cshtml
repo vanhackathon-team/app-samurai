@@ -17,7 +17,7 @@
                             </label>
                             <div class="mdl-textfield__expandable-holder" style="width: 300px;">
 
-                                <input class="mdl-textfield__input" type="text" id="search" placeholder="Search">
+                                <input class="mdl-textfield__input" type="text" id="search" placeholder="Search" onkeyup="onSearch('g');" />
                                 <label class="mdl-textfield__label" for="search">query here...</label>
 
                             </div>
@@ -38,7 +38,7 @@
                             </label>
                             <div class="mdl-textfield__expandable-holder" style="width: 300px;">
 
-                                <input class="mdl-textfield__input" type="text" id="search2" placeholder="Search">
+                                <input class="mdl-textfield__input" type="text" id="search2" placeholder="Search" onsubmit="onSearch('g');" />
                                 <label class="mdl-textfield__label" for="search2">query here...</label>
 
                             </div>
@@ -60,7 +60,8 @@
                             <div class="mdl-cell mdl-cell--12-col mdl-grid">
                                 <ul class="mdl-list mdl-cell mdl-cell--12-col">
                                     <li class="mdl-list__item mdl-list__item--three-line demo-card-wide mdl-card mdl-shadow--2dp mdl-color--white mdl-cell--12-col listagem" 
-                                        style=" padding-top: 0px; margin-bottom: 5px; margin-top: 5px; padding-bottom: 0px;  height: 105%;" onclick="localtion.href = '' @Html.DisplayFor(modelItem => item.Package));">
+                                        style=" padding-top: 0px; margin-bottom: 5px; margin-top: 5px; padding-bottom: 0px;  height: 105%;" 
+                                        onclick="location.href = '?p=@ViewBag.p&q=@Html.DisplayFor(modelItem => item.Package)&c=us';">
                                         <label class="mdl-list__item-primary-content">
                                             <img src="@Html.DisplayFor(modelItem => item.Icon)" style="width: 35px;height: 35px;" />
                                             <label>@Html.DisplayFor(modelItem => item.Name)</label>
@@ -89,6 +90,28 @@
 
 <script>
 
-    function callDetails(url)
+    function onSearch(id, p) {
+
+        var element = document.getElementById(id);
+        location.href = '?p='+p+'&q=' + element.value + '&c=us';
+
+    }
+
+    document.getElementById("search")
+        .addEventListener("keyup", function (event) {
+            event.preventDefault();
+            if (event.keyCode == 13) {
+                onSearch('search','g');
+            }
+        });
+
+
+    document.getElementById("search2")
+        .addEventListener("keyup", function (event) {
+            event.preventDefault();
+            if (event.keyCode == 13) {
+                onSearch('search2','a');
+            }
+        });
 
 </script>
