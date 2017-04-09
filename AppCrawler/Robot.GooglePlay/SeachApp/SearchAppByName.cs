@@ -4,6 +4,7 @@ using Domain.Entities;
 using HtmlAgilityPack;
 using Domain;
 using System;
+using Domain.SearchApp;
 
 namespace Robot.GooglePlay.SeachApp
 {
@@ -13,9 +14,9 @@ namespace Robot.GooglePlay.SeachApp
         {
         }
 
-        protected override string getSearchUrl(string q, string country)
+        protected override string GetSearchUrl(string q, string country)
         {
-            return $"https://play.google.com/store/search?q={a}&hl={country}";            
+            return $"https://play.google.com/store/search?q={q}&hl={country}";            
         }
     }
 }
