@@ -146,7 +146,7 @@ namespace Robot.AppStore.iTunes.GetApp
             return positionApp;
         }
 
-        private string ExtractIdFromAppUrl(string appUrl)
+        public static string ExtractIdFromAppUrl(string appUrl)
         {
             var urlSplited = appUrl.Split('/');
             var idWithParametersUrl = urlSplited[urlSplited.Length - 1];

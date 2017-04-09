@@ -70,7 +70,8 @@ namespace Robot.AppStore.iTunes.SearchApp
                         Name = appName,
                         Description = appPartialDescription,
                         Icon = appImage,
-                        Link = appLink
+                        Link = appLink,
+                        Package = GetApp.GetApp.ExtractIdFromAppUrl(appLink)
                     };
 
                     apps.Add(appResult);
