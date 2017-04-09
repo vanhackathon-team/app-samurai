@@ -8,6 +8,13 @@ namespace Robot.GooglePlay.SeachApp
 {
     class SearchAppByLink : ISearchApp
     {
+        public ISearchApp SearchApp { get; }
+
+        public SearchAppByLink(ISearchApp searchApp)
+        {
+            SearchApp = searchApp;
+        }
+
         private static HtmlNode[] getDescendents(HtmlNode cardDiv,
             string targetObject, string attribute, string comparationValue)
         {
