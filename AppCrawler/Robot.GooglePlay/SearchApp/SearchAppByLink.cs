@@ -52,6 +52,7 @@ namespace Robot.GooglePlay.SearchApp
                 var prices = GetDescendents(cardDiv, "span", "class", "display-price");
                 var descriptions = GetDescendents(cardDiv, "div", "class", "description");
                 var ratings = GetDescendents(cardDiv, "div", "class", "current-rating");
+                var icon = GetDescendents(cardDiv, "img", "class", "cover-image");
 
                 for (int index = 0; index < names.Length; index++)
                 {
@@ -66,7 +67,8 @@ namespace Robot.GooglePlay.SearchApp
                         Price = prices.Length != 0 ? prices[index].InnerText : string.Empty,
                         Description = descriptions[index].InnerText,
                         Package = names[index].GetAttributeValue("href", string.Empty).Split('=')[1],
-                        Rating = rating
+                        Rating = rating,
+                        Icon = icon[index].GetAttributeValue("src", string.Empty)
                     };
                     apps.Add(app);
                 }

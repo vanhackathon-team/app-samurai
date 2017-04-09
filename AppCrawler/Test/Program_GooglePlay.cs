@@ -19,20 +19,20 @@ namespace Test
             Console.WriteLine("Starting ...\n");
             Console.WriteLine("============================================");
 
-            /*ISearchApp robot = new SearchAppByName(new SearchAppByLink(null));
+            ISearchApp robot = new SearchAppByName(new SearchAppByLink(null));
 
             IEnumerable<App> apps = robot.Search("whatsapp", "en");
             foreach (var app in apps)
                 Console.WriteLine(app);
-            */
+            
 
-            IGetApp robotApp = new GetApp();
+            /*IGetApp robotApp = new GetApp();
 
             App app = robotApp.Get("org.mozilla.firefox", "pt");
             Console.WriteLine(app);
 
             foreach (string url in app.Screenshots)
-                Console.WriteLine(url);
+                Console.WriteLine(url);*/
 
             Console.WriteLine("============================================");
             Console.WriteLine("\nEnd!");
