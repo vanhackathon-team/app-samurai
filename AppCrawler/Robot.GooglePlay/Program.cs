@@ -12,6 +12,9 @@ namespace Robot.GooglePlay
 {
     class Program
     {
-        
+        public static void Main(string[] args)
+        {
+            ISearchApp search = new SearchAppByName(new SearchAppByLink(null));             
+        }
     }
 }
