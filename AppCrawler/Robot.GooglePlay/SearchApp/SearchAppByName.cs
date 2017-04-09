@@ -6,7 +6,7 @@ using Domain;
 using System;
 using Domain.SearchApp;
 
-namespace Robot.GooglePlay.SeachApp
+namespace Robot.GooglePlay.SearchApp
 {
     public class SearchAppByName : BaseSearchAppByName
     {

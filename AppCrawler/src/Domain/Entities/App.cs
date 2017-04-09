@@ -12,7 +12,22 @@ namespace Domain.Entities
 
         public string Description { get; set; }
 
-        public string Icon { get; set; }
+        private string icon;
+
+        public string Icon
+        {
+            get {
+                if (icon == null)
+                    return string.Empty;
+
+                if (icon.Contains("https"))
+                    return icon;
+                else
+                    return $"https:{icon}";
+            }
+            set { icon = value; }
+        }
+
 
         public int RankingCategory { get; set; }
 

@@ -6,7 +6,7 @@ using System.Linq;
 using System;
 using Robot.GooglePlay.Helpers;
 
-namespace Robot.GooglePlay.SeachApp
+namespace Robot.GooglePlay.SearchApp
 {
     public class SearchAppByLink : ISearchApp
     {

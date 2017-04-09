@@ -4,17 +4,37 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Domain.Interfaces;
-using Robot.AppStore.iTunes.GetApp;
-using Robot.AppStore.iTunes.SearchApp;
+using Robot;
 using Domain.Entities;
 
 namespace WebApp.Controllers
 {
     public class HomeController : Controller
     {
-        public IActionResult Index()
+        [HttpGet]
+        public IActionResult Index(string p, string q, string c)
         {
-            return View();
+            if (p == string.Empty || (p != "g" && p != "a"))
+                return View(null);
+
+            ISearchApp searchApp;
+
+            if (p == "g")
+                searchApp = new Robot
+                    .GooglePlay.SearchApp.SearchAppByName
+                    (new Robot.GooglePlay.SearchApp.SearchAppByLink(null));
+            else
+                searchApp = new Robot
+                    .AppStore.iTunes.SearchApp.SearchAppByName
+                    (new Robot.AppStore.iTunes.SearchApp.SearchAppByLink(null));
+
+            IEnumerable<App> searchResult = searchApp.Search(q, c);
+
+            ViewBag.p = p;
+            ViewBag.q = q;
+            ViewBag.c = c;
+
+            return View(searchResult);
         }
 
         public IActionResult About()
@@ -31,13 +51,29 @@ namespace WebApp.Controllers
             return View();
         }
 
-        public IActionResult Details(string search)
+        [HttpGet]
+        public IActionResult Details(string p, string q, string c)
         {
-            ISearchApp searchApp = new SearchAppByName(new SearchAppByLink(null));
-            IGetApp getApp = new GetApp();
+            if(p == string.Empty || ( p != "g" && p != "a"))
+                return View();
 
-            IEnumerable<App> searchResult = searchApp.Search(search, "us");
+            ISearchApp searchApp;
 
+            if (p == "g")
+                searchApp = new Robot
+                    .GooglePlay.SearchApp.SearchAppByName
+                    (new Robot.GooglePlay.SearchApp.SearchAppByLink(null));
+            else
+                searchApp = new Robot
+                    .AppStore.iTunes.SearchApp.SearchAppByName
+                    (new Robot.AppStore.iTunes.SearchApp.SearchAppByLink(null));
+
+            IEnumerable<App> searchResult = searchApp.Search(q, c);
+
+            ViewBag.p = p;
+            ViewBag.q = q;
+            ViewBag.c = c;
+            
             return View(searchResult);
         }
     }

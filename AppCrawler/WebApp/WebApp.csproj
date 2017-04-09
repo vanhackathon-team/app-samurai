@@ -30,6 +30,7 @@
     <DotNetCliToolReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Tools" Version="1.0.0" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Robot.GooglePlay\Robot.GooglePlay.csproj" />
     <ProjectReference Include="..\src\Domain\Domain.csproj" />
     <ProjectReference Include="..\src\Robot.AppStore.iTunes\Robot.AppStore.iTunes.csproj" />
   </ItemGroup>
