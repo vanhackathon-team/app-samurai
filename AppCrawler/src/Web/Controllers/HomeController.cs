@@ -1,4 +1,8 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Domain.Entities;
+using Domain.Interfaces;
+using Microsoft.AspNetCore.Mvc;
+using Robot.AppStore.iTunes.GetApp;
+using Robot.AppStore.iTunes.SearchApp;
 using System;
 using System.Collections.Generic;
 using System.Linq;
