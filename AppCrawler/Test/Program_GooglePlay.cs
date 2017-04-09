@@ -10,9 +10,9 @@ using System.Threading.Tasks;
 
 namespace Test
 {
-    class Program
+    class Program_GooglePlay
     {
-        public static void Main(string[] args)
+        public static void MainTest(string[] args)
         {
 
             Console.WriteLine("Starting ...\n");

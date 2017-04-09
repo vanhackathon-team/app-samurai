@@ -37,6 +37,8 @@ namespace Robot.AppStore.iTunes.GetApp
                     .Descendants("div")
                     .FirstOrDefault(a => a.GetAttributeValue("class", string.Empty)
                     .Contains("artwork"))
+                    .Descendants("img")
+                    .FirstOrDefault()
                     .GetAttributeValue("src", string.Empty);
 
                 string[] screenshots = containerResult
@@ -45,6 +47,22 @@ namespace Robot.AppStore.iTunes.GetApp
                     .Descendants("img")
                     .Select(i => i.GetAttributeValue("src", string.Empty)).ToArray();
 
+                var categoryContainer = containerResult.Descendants("div")
+                    .FirstOrDefault(a => a.Id == "left-stack")
+                        .Descendants("li")
+                        .FirstOrDefault(l => l.GetAttributeValue("class", string.Empty)
+                            .Contains("genre"))
+                            .Descendants("a")
+                            .FirstOrDefault();
+
+                string categoryName = categoryContainer
+                                        .Descendants("span")                     
+                                        .FirstOrDefault()
+                                        .InnerHtml;
+
+                string categoryLink = categoryContainer
+                            .GetAttributeValue("href", string.Empty);
+
                 App app = new App()
                 {
                     Name = appName,
@@ -52,29 +70,15 @@ namespace Robot.AppStore.iTunes.GetApp
                     Icon = appImageLink,
                     Link = urlApp,
                     Screenshots = screenshots,
-                    RankingCategory = FillRankingCategory(containerResult, urlApp),
-                    PositionOverall = FillPositionOverall(urlApp)
+                    RankingCategory = GetRankingCategory(categoryLink, urlApp),
+                    PositionOverall = FillPositionOverall(urlApp),
+                    Category = categoryName
                 };
 
                 return app;
             }
 
             return null;
-        }
-
-        private int FillRankingCategory(HtmlNode node, string urlApp)
-        {
-            var urlCategory = node
-                    .Descendants("div")
-                    .FirstOrDefault(a => a.Id == "left-stack")
-                        .Descendants("li")
-                        .FirstOrDefault(l => l.GetAttributeValue("class", string.Empty)
-                            .Contains("genre"))
-                            .Descendants("a")
-                            .FirstOrDefault()
-                            .GetAttributeValue("href", string.Empty);
-
-            return GetRankingCategory(urlCategory, urlApp);
         }
 
         private int GetRankingCategory(string urlCategory, string urlApp)
@@ -91,7 +95,7 @@ namespace Robot.AppStore.iTunes.GetApp
                                         .Descendants("a")
                                             .Select(a => a.GetAttributeValue("href", string.Empty));
 
-            int positionAppCategory = 1;
+            int positionAppCategory = -1;
             for (int i = 0; i < categoryAppsLinks.Count(); i++)
             {
                 var l = categoryAppsLinks.ElementAt(i);

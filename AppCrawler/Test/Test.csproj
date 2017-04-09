@@ -57,7 +57,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Program.cs" />
+    <Compile Include="Program_GooglePlay.cs" />
+    <Compile Include="Program_AppStore.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -71,6 +72,10 @@
     <ProjectReference Include="..\src\Domain\Domain.csproj">
       <Project>{ec176983-111e-4d89-9bb6-3990314956f3}</Project>
       <Name>Domain</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\src\Robot.AppStore.iTunes\Robot.AppStore.iTunes.csproj">
+      <Project>{ea0c87ed-4a41-4b6d-8a42-3c9812b7efc6}</Project>
+      <Name>Robot.AppStore.iTunes</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

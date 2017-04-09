@@ -1,8 +1,4 @@
-﻿@{
-    ViewData["Title"] = "Página Inicial";
-}
-
-<!doctype html>
+﻿<!doctype html>
 <!--
   Material Design Lite
   Copyright 2015 Google Inc. All rights reserved.
@@ -25,7 +21,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="description" content="A front-end template that helps you build fast, modern mobile web apps.">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0">
-    <title>Material Design Lite</title>
+    <title>Store Crawler</title>
 
     <!-- Add to homescreen for Chrome on Android -->
     <meta name="mobile-web-app-capable" content="yes">
@@ -80,10 +76,8 @@
                 </div>
             </header>
             <nav class="demo-navigation mdl-navigation mdl-color--blue-grey-800">
-                <a class="mdl-navigation__link" href=""><i class="mdl-color-text--blue-grey-400 material-icons" role="presentation">home</i>Home</a>
-                <a class="mdl-navigation__link" href=""><i class="mdl-color-text--blue-grey-400 material-icons" role="presentation">phone_android</i>Google Play</a>
-                <a class="mdl-navigation__link" href=""><i class="mdl-color-text--blue-grey-400 material-icons" role="presentation">phone_iphone</i>Apple Store</a>
-                <a class="mdl-navigation__link" href=""><i class="mdl-color-text--blue-grey-400 material-icons" role="presentation">storage</i>GitHub</a>
+                <a class="mdl-navigation__link" href="index.html"><i class="mdl-color-text--blue-grey-400 material-icons" role="presentation">home</i>Home</a>
+                <a class="mdl-navigation__link" href="https://github.com/vanhackathon-team/app-samurai"><i class="mdl-color-text--blue-grey-400 material-icons" role="presentation">storage</i>GitHub</a>
                 <a class="mdl-navigation__link" href=""><i class="mdl-color-text--blue-grey-400 material-icons" role="presentation">people</i>About Us</a>
                 <a class="mdl-navigation__link" href=""><i class="mdl-color-text--blue-grey-400 material-icons" role="presentation">forum</i>Contact</a>
             </nav>
@@ -99,9 +93,17 @@
                             Collect indicators of a mobile application by the Google Play Store.
                         </div>
                         <div class="mdl-card__actions mdl-card--border">
-                            <a class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect">
-                                Get Started
-                            </a>
+                            <div class="mdl-textfield mdl-js-textfield mdl-textfield--expandable" style="float: left">
+                                <label class="mdl-button mdl-js-button mdl-button--icon" for="search">
+                                    <i class="material-icons">search</i>
+                                </label>
+                                <div class="mdl-textfield__expandable-holder" style="width: 300px;">
+
+                                    <input class="mdl-textfield__input" type="text" id="search" placeholder="Search">
+                                    <label class="mdl-textfield__label" for="search">query here...</label>
+
+                                </div>
+                            </div>
                         </div>
                     </div>
                     <div class="demo-card-wide mdl-card mdl-shadow--2dp mdl-cell mdl-cell--12-col mdl-cell--12-col-tablet mdl-cell--6-col-desktop">
@@ -112,9 +114,17 @@
                             Collect indicators of a mobile application by the Apple Store.
                         </div>
                         <div class="mdl-card__actions mdl-card--border">
-                            <a class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect">
-                                Get Started
-                            </a>
+                            <div class="mdl-textfield mdl-js-textfield mdl-textfield--expandable" style="float: left">
+                                <label class="mdl-button mdl-js-button mdl-button--icon" for="search2">
+                                    <i class="material-icons">search</i>
+                                </label>
+                                <div class="mdl-textfield__expandable-holder" style="width: 300px;">
+
+                                    <input class="mdl-textfield__input" type="text" id="search2" placeholder="Search">
+                                    <label class="mdl-textfield__label" for="search2">query here...</label>
+
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
