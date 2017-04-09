@@ -1,12 +1,12 @@
 ﻿using Domain.Entities;
 using Domain.Interfaces;
-using Robot.AppStore.iTunes.GetApp;
-using Robot.AppStore.iTunes.SearchApp;
+using Robot.GooglePlay.SeachApp;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+
 
 namespace Test
 {
@@ -14,7 +14,24 @@ namespace Test
     {
         public static void Main(string[] args)
         {
-            ISearchApp searchApp = new SearchAppByName(new SearchAppByLink(null));
+
+            Console.WriteLine("Starting ...\n");
+            Console.WriteLine("============================================");
+
+            ISearchApp robot = new SearchAppByName(new SearchAppByLink(null));
+
+            IEnumerable<App> apps = robot.Search("whatsapp", "pt");
+            foreach (var app in apps)
+                Console.WriteLine(app);
+
+            Console.WriteLine("============================================");
+            Console.WriteLine("\nEnd!");
+            Console.ReadKey();
+        }
+
+        public static void Main2(string[] args)
+        {
+            /*ISearchApp searchApp = new SearchAppByName(new SearchAppByLink(null));
             IGetApp getApp = new GetApp();
 
             IEnumerable<App> searchResult = searchApp.Search("whatsapp", "us");
@@ -43,6 +60,7 @@ namespace Test
             }
 
             Console.ReadKey();
+            */
         }
     }
 }

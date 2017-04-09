@@ -39,7 +39,12 @@ namespace Domain.Entities
                 + "Description: " + Description + "\n "
                 + "Rating: " + Rating + "\n "
                 + "Price: " + Price + "\n "
-                + "Package: " + Package + "\n ";
+                + "Package: " + Package + "\n "
+                + "RankingCategory: " + RankingCategory + "\n "
+                + "PositionOverall: " + PositionOverall + "\n "
+                + "Icon: " + Icon + "\n "
+                + "Link: " + Link + "\n "
+                + "Screenshots: " + Screenshots + "\n ";
         }
     }
 }

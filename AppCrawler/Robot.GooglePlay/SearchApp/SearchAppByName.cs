@@ -8,7 +8,7 @@ using Domain.SearchApp;
 
 namespace Robot.GooglePlay.SeachApp
 {
-    class SearchAppByName : BaseSearchAppByName
+    public class SearchAppByName : BaseSearchAppByName
     {
         public SearchAppByName(ISearchApp searchApp) : base(searchApp)
         {
@@ -16,7 +16,7 @@ namespace Robot.GooglePlay.SeachApp
 
         protected override string GetSearchUrl(string q, string country)
         {
-            return $"https://play.google.com/store/search?q={q}&hl={country}";            
+            return $"https://play.google.com/store/search?q={q}&gl={country}&c=apps";            
         }
     }
 }

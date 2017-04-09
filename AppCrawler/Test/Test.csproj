@@ -64,13 +64,13 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Robot.GooglePlay\Robot.GooglePlay.csproj">
+      <Project>{acae3802-624f-492f-8eaa-89e4da4ee611}</Project>
+      <Name>Robot.GooglePlay</Name>
+    </ProjectReference>
     <ProjectReference Include="..\src\Domain\Domain.csproj">
       <Project>{ec176983-111e-4d89-9bb6-3990314956f3}</Project>
       <Name>Domain</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\src\Robot.AppStore.iTunes\Robot.AppStore.iTunes.csproj">
-      <Project>{ea0c87ed-4a41-4b6d-8a42-3c9812b7efc6}</Project>
-      <Name>Robot.AppStore.iTunes</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

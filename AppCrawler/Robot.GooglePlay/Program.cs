@@ -1,4 +1,5 @@
 ﻿using Domain;
+using Domain.Entities;
 using Domain.Interfaces;
 using Robot.GooglePlay.SeachApp;
 using System;
@@ -11,11 +12,6 @@ namespace Robot.GooglePlay
 {
     class Program
     {
-        public static void Main(string[] args)
-        {
-            ISearchApp search = new SearchAppByName(new SearchAppByLink(null));                      
-
-            
-        }
+        
     }
 }

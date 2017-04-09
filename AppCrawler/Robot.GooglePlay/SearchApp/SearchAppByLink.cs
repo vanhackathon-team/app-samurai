@@ -3,11 +3,15 @@ using Domain.Entities;
 using Domain.Interfaces;
 using HtmlAgilityPack;
 using System.Linq;
+using System;
 
 namespace Robot.GooglePlay.SeachApp
 {
-    class SearchAppByLink : ISearchApp
+    public class SearchAppByLink : ISearchApp
     {
+
+        const string APP_URL = "https://play.google.com/store/apps/category/{category}/collection/topselling_free";
+
         public ISearchApp SearchApp { get; }
 
         public SearchAppByLink(ISearchApp searchApp)
@@ -15,7 +19,7 @@ namespace Robot.GooglePlay.SeachApp
             SearchApp = searchApp;
         }
 
-        private static HtmlNode[] getDescendents(HtmlNode cardDiv,
+        private static HtmlNode[] GetDescendents(HtmlNode cardDiv,
             string targetObject, string attribute, string comparationValue)
         {
 
@@ -26,7 +30,15 @@ namespace Robot.GooglePlay.SeachApp
 
         public IEnumerable<App> Search(string q, string country)
         {
-            List<App> apps = new List<App>();
+            if (IsALink(q) == false)
+                return SearchApp?.Search(q, country);
+                        
+            return MapHtmlToApps(q);
+        }
+
+        public IEnumerable<App> MapHtmlToApps(string q)
+        {
+            IList<App> apps = new List<App>();
 
             HtmlWeb web = new HtmlWeb();
             HtmlDocument html = web.Load(q);
@@ -37,11 +49,11 @@ namespace Robot.GooglePlay.SeachApp
 
             foreach (var cardDiv in cardDivs)
             {
-                var names = getDescendents(cardDiv, "a", "class", "title");
-                var subtitles = getDescendents(cardDiv, "a", "class", "subtitle");
-                var prices = getDescendents(cardDiv, "span", "class", "display-price");
-                var descriptions = getDescendents(cardDiv, "div", "class", "description");
-                var ratings = getDescendents(cardDiv, "div", "class", "current-rating");
+                var names = GetDescendents(cardDiv, "a", "class", "title");
+                var subtitles = GetDescendents(cardDiv, "a", "class", "subtitle");
+                var prices = GetDescendents(cardDiv, "span", "class", "display-price");
+                var descriptions = GetDescendents(cardDiv, "div", "class", "description");
+                var ratings = GetDescendents(cardDiv, "div", "class", "current-rating");
 
                 for (int index = 0; index < names.Length; index++)
                 {
@@ -55,7 +67,7 @@ namespace Robot.GooglePlay.SeachApp
                     {
                         Name = names[index].InnerText,
                         SubTitle = subtitles[index].InnerText,
-                        Price = prices[index].InnerText,
+                        //Price = prices[index].InnerText,
                         Description = descriptions[index].InnerText,
                         Package = names[index].GetAttributeValue("href", string.Empty).Split('=')[1],
                         Rating = rating
@@ -64,6 +76,11 @@ namespace Robot.GooglePlay.SeachApp
                 }
             }
             return apps;
+        }
+
+        private bool IsALink(string q)
+        {
+            return Uri.IsWellFormedUriString(q, UriKind.Absolute);
         }
     }
 }
