@@ -1,6 +1,7 @@
 ﻿using Domain.Entities;
 using Domain.Interfaces;
 using HtmlAgilityPack;
+using Robot.AppStore.iTunes.Helpers;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -21,7 +22,7 @@ namespace Robot.AppStore.iTunes.SearchApp
             if (IsALink(q) == false)
                 return SearchApp?.Search(q, country);
             
-            q = GetUrlWithCountry(q, country);
+            q = AppUrl.GetUrlWithCountry(q, country);
             if (q == null)
                 return new List<App>();
 
@@ -29,27 +30,6 @@ namespace Robot.AppStore.iTunes.SearchApp
             var doc = web.Load(q);
 
             return MapHtmlToApps(doc);
-        }
-
-        private string GetUrlWithCountry(string url, string country)
-        {
-            try
-            {
-                var appleUrl = "https://itunes.apple.com/";
-                var appUrl = url.Substring(appleUrl.Length, url.Length - appleUrl.Length);
-                var appUrlArray = appUrl.Split('/').ToList();
-
-                if (appUrlArray[0]?.ToLower() != "app")
-                    appUrlArray.RemoveAt(0);
-
-                appUrl = string.Concat(appleUrl, "/", country, "/", string.Join("/", appUrlArray.ToArray()));
-
-                return appUrl;
-            }
-            catch
-            {
-                return null;
-            }
         }
 
         private IEnumerable<App> MapHtmlToApps(HtmlDocument doc)

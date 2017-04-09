@@ -1,9 +1,9 @@
-﻿using System;
-using Domain.Entities;
+﻿using Domain.Entities;
 using Domain.Interfaces;
 using HtmlAgilityPack;
 using System.Linq;
 using System.Collections.Generic;
+using Robot.AppStore.iTunes.Helpers;
 
 namespace Robot.AppStore.iTunes.GetApp
 {
@@ -11,8 +11,10 @@ namespace Robot.AppStore.iTunes.GetApp
     {
         public App Get(string urlApp, string country)
         {
-            HtmlWeb web = new HtmlWeb();  
-            HtmlDocument doc = web.Load(urlApp);
+            HtmlWeb web = new HtmlWeb();
+
+            string urlAppWithCountry = AppUrl.GetUrlWithCountry(urlApp, country);
+            HtmlDocument doc = web.Load(urlAppWithCountry);
 
             var containerResult = doc.DocumentNode
                 .Descendants("div")
@@ -50,15 +52,98 @@ namespace Robot.AppStore.iTunes.GetApp
                     Icon = appImageLink,
                     Link = urlApp,
                     Screenshots = screenshots,
-                    RankingCategory = FillRankingCategory(containerResult, country)
+                    RankingCategory = FillRankingCategory(containerResult, urlApp),
+                    PositionOverall = FillPositionOverall(urlApp, country)
                 };
             }
+
             return null;
         }
 
-        private IDictionary<string, int> FillRankingCategory(HtmlNode doc, string country)
+        private int FillRankingCategory(HtmlNode node, string urlApp)
         {
-            return null;
+            var urlCategory = node
+                    .Descendants("div")
+                    .FirstOrDefault(a => a.Id == "left-stack")
+                        .Descendants("li")
+                        .FirstOrDefault(l => l.GetAttributeValue("class", string.Empty)
+                            .Contains("genre"))
+                            .Descendants("a")
+                            .FirstOrDefault()
+                            .GetAttributeValue("href", string.Empty);
+
+            return GetRankingCategory(urlCategory, urlApp);
+        }
+
+        private int GetRankingCategory(string urlCategory, string urlApp)
+        {
+            HtmlWeb web = new HtmlWeb();
+
+            var docCategory = web.Load(urlCategory);
+
+            var containerAppsCategory = docCategory.DocumentNode
+                                            .Descendants("div")
+                                            .FirstOrDefault(d => d.Id == "selectedcontent");
+
+            var categoryAppsLinks = containerAppsCategory
+                                        .Descendants("a")
+                                            .Select(a => a.GetAttributeValue("href", string.Empty));
+
+            int positionAppCategory = 1;
+            for (int i = 0; i <= categoryAppsLinks.Count(); i++)
+            {
+                var l = categoryAppsLinks.ElementAt(i);
+
+                if (l == urlApp)
+                {
+                    positionAppCategory = i + 1;
+                    break;
+                }
+            }
+
+            return positionAppCategory;
+        }
+
+        private int FillPositionOverall(string appUrl, string country)
+        {
+            string urlOverall = $"http://www.apple.com/{country}/itunes/charts/free-apps/";
+
+            HtmlWeb web = new HtmlWeb();
+            HtmlDocument doc = web.Load(urlOverall);
+
+            var containerApps = doc.DocumentNode
+                                    .Descendants("div")
+                                    .FirstOrDefault(c => c.GetAttributeValue("class", string.Empty)
+                                    .Contains("section-content"));
+
+            var linksApps = containerApps.Descendants("a")
+                                    .Where(a => a.GetAttributeValue("class", string.Empty)
+                                    .Contains("more"))
+                                    .Select(l => l.GetAttributeValue("href", string.Empty));
+
+            var idCurrentApp = ExtractIdFromAppUrl(appUrl);
+
+            int positionApp = 1;
+            for (int i = 0; i < linksApps.Count(); i++)
+            {
+                if (ExtractIdFromAppUrl(linksApps.ElementAt(i)) == idCurrentApp)
+                {
+                    positionApp = i + 1;
+                    break;
+                }
+            }
+
+            return positionApp;
+        }
+
+        private string ExtractIdFromAppUrl(string appUrl)
+        {
+            var urlSplited = appUrl.Split('/');
+            var idWithParametersUrl = urlSplited[urlSplited.Length - 1];
+
+            var id = idWithParametersUrl.Remove(idWithParametersUrl.IndexOf("?"), idWithParametersUrl.Length);
+
+            return id;
         }
     }
 }

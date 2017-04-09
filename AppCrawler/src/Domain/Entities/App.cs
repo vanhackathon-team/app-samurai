@@ -14,7 +14,7 @@ namespace Domain.Entities
 
         public string Icon { get; set; }
 
-        public IDictionary<string, int> RankingCategory { get; set; }
+        public int RankingCategory { get; set; }
 
         public int PositionOverall { get; set; }
 
