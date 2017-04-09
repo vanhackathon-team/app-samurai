@@ -40,7 +40,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Entities\BaseSearchAppByName.cs" />
+    <Compile Include="SearchApp\BaseSearchAppByName.cs" />
     <Compile Include="Entities\App.cs" />
     <Compile Include="Interfaces\IGetApp.cs" />
     <Compile Include="Interfaces\ISearchApp.cs" />

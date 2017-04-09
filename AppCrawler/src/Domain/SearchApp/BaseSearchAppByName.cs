@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 using Domain.Entities;
 using Domain.Interfaces;
 
-namespace Domain
+namespace Domain.SearchApp
 {
     public abstract class BaseSearchAppByName : ISearchApp
     {
@@ -17,12 +17,12 @@ namespace Domain
             SearchApp = searchApp;
         }
 
-        protected abstract string getSearchUrl(string q, string country);
+        protected abstract string GetSearchUrl(string q, string country);
 
         public IEnumerable<App> Search(string q, string country)
         {
             if (IsNotALink(q))
-                q = getSearchUrl(q, country);
+                q = GetSearchUrl(q, country);
 
             return SearchApp?.Search(q, country);
         }

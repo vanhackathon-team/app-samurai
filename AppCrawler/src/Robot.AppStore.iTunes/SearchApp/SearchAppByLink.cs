@@ -22,25 +22,25 @@ namespace Robot.AppStore.iTunes.SearchApp
             if (IsALink(q) == false)
                 return SearchApp?.Search(q, country);
             
-            q = AppUrl.GetUrlWithCountry(q, country);
+            q = AppUrl.GetUrlWithCountry("http://www.apple.com", q, country);
             if (q == null)
                 return new List<App>();
 
-            HtmlWeb web = new HtmlWeb();
-            var doc = web.Load(q);
-
-            return MapHtmlToApps(doc);
+            return MapHtmlToApps(q);
         }
 
-        private IEnumerable<App> MapHtmlToApps(HtmlDocument doc)
+        private IEnumerable<App> MapHtmlToApps(string appUrl)
         {
             IList<App> apps = new List<App>();
 
+            HtmlWeb web = new HtmlWeb();
+            var doc = web.Load(appUrl);
+
             var containerResult = doc.DocumentNode.Descendants("div")
-                .FirstOrDefault(eu => eu.Id == "exploreCurated");
+                .FirstOrDefault(eu => eu.GetAttributeValue("id", string.Empty) == "exploreCurated");
 
             if (containerResult != null)
-            { 
+            {
                 var results = containerResult.Descendants("div")
                             .Where(a => a.GetAttributeValue("class", string.Empty)
                             .Contains("as-explore-product"));
@@ -57,7 +57,8 @@ namespace Robot.AppStore.iTunes.SearchApp
 
                     string appImage = app.Descendants("img")
                                         .FirstOrDefault(n => n.GetAttributeValue("class", string.Empty)
-                                        .Contains("as-explore-img")).InnerHtml;
+                                        .Contains("as-explore-img"))
+                                        .GetAttributeValue("src", string.Empty);
 
                     string appLink = app.Descendants("a")
                                         .FirstOrDefault(n => n.GetAttributeValue("class", string.Empty)
