@@ -7,8 +7,8 @@ using System.Threading.Tasks;
 
 namespace Domain.Interfaces
 {
-    public interface ISearchApp
+    public interface IGetApp
     {
-        IEnumerable<App> Search(string q, string country);
+        App Get(string urlApp, string country);
     }
 }

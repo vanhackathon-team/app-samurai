@@ -14,13 +14,11 @@ namespace Robot.AppStore.iTunes.SearchApp
             SearchApp = searchApp;
         }
 
-        public IEnumerable<App> Search(string q)
-        {
-            // TODO: Implent search when parameter is a name 
-            if (IsNotALink(q) == false)
-                return SearchApp?.Search(q);
+        public IEnumerable<App> Search(string q, string country)
+        {   if (IsNotALink(q))
+                q = $"http://www.apple.com/{country}/search/{q}?src=serp";
 
-            return null;
+            return SearchApp?.Search(q, country);
         }
 
         private bool IsNotALink(string q)

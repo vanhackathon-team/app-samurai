@@ -16,15 +16,40 @@ namespace Robot.AppStore.iTunes.SearchApp
             SearchApp = searchApp;
         }
 
-        public IEnumerable<App> Search(string q)
+        public IEnumerable<App> Search(string q, string country)
         {
             if (IsALink(q) == false)
-                return SearchApp?.Search(q);
+                return SearchApp?.Search(q, country);
+            
+            q = GetUrlWithCountry(q, country);
+            if (q == null)
+                return new List<App>();
 
             HtmlWeb web = new HtmlWeb();
             var doc = web.Load(q);
 
             return MapHtmlToApps(doc);
+        }
+
+        private string GetUrlWithCountry(string url, string country)
+        {
+            try
+            {
+                var appleUrl = "https://itunes.apple.com/";
+                var appUrl = url.Substring(appleUrl.Length, url.Length - appleUrl.Length);
+                var appUrlArray = appUrl.Split('/').ToList();
+
+                if (appUrlArray[0]?.ToLower() != "app")
+                    appUrlArray.RemoveAt(0);
+
+                appUrl = string.Concat(appleUrl, "/", country, "/", string.Join("/", appUrlArray.ToArray()));
+
+                return appUrl;
+            }
+            catch
+            {
+                return null;
+            }
         }
 
         private IEnumerable<App> MapHtmlToApps(HtmlDocument doc)
@@ -37,7 +62,8 @@ namespace Robot.AppStore.iTunes.SearchApp
             if (containerResult != null)
             { 
                 var results = containerResult.Descendants("div")
-                            .Where(a => a.GetAttributeValue("class", string.Empty).Contains("as-explore-product"));
+                            .Where(a => a.GetAttributeValue("class", string.Empty)
+                            .Contains("as-explore-product"));
 
                 foreach (var app in results)
                 {
