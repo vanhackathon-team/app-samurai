@@ -13,7 +13,7 @@ namespace Robot.AppStore.iTunes.GetApp
         {
             HtmlWeb web = new HtmlWeb();
 
-            string urlAppWithCountry = AppUrl.GetUrlWithCountry(urlApp, country);
+            string urlAppWithCountry = AppUrl.GetUrlWithCountry("https://itunes.apple.com", urlApp, country);
             HtmlDocument doc = web.Load(urlAppWithCountry);
 
             var containerResult = doc.DocumentNode
@@ -41,7 +41,7 @@ namespace Robot.AppStore.iTunes.GetApp
 
                 string[] screenshots = containerResult
                     .Descendants("div")
-                    .FirstOrDefault(s => s.GetAttributeValue("class", string.Empty).Contains("image-wrapper"))
+                    .FirstOrDefault(s => s.GetAttributeValue("class", string.Empty).Contains("screenshots"))
                     .Descendants("img")
                     .Select(i => i.GetAttributeValue("src", string.Empty)).ToArray();
 
@@ -53,8 +53,10 @@ namespace Robot.AppStore.iTunes.GetApp
                     Link = urlApp,
                     Screenshots = screenshots,
                     RankingCategory = FillRankingCategory(containerResult, urlApp),
-                    PositionOverall = FillPositionOverall(urlApp, country)
+                    PositionOverall = FillPositionOverall(urlApp)
                 };
+
+                return app;
             }
 
             return null;
@@ -90,7 +92,7 @@ namespace Robot.AppStore.iTunes.GetApp
                                             .Select(a => a.GetAttributeValue("href", string.Empty));
 
             int positionAppCategory = 1;
-            for (int i = 0; i <= categoryAppsLinks.Count(); i++)
+            for (int i = 0; i < categoryAppsLinks.Count(); i++)
             {
                 var l = categoryAppsLinks.ElementAt(i);
 
@@ -104,29 +106,33 @@ namespace Robot.AppStore.iTunes.GetApp
             return positionAppCategory;
         }
 
-        private int FillPositionOverall(string appUrl, string country)
+        private int FillPositionOverall(string appUrl)
         {
-            string urlOverall = $"http://www.apple.com/{country}/itunes/charts/free-apps/";
+            string urlOverall = $"http://www.apple.com/itunes/charts/free-apps/";
 
             HtmlWeb web = new HtmlWeb();
             HtmlDocument doc = web.Load(urlOverall);
 
             var containerApps = doc.DocumentNode
-                                    .Descendants("div")
+                                    .Descendants("section")
                                     .FirstOrDefault(c => c.GetAttributeValue("class", string.Empty)
-                                    .Contains("section-content"));
+                                    .Contains("chart-grid"));
 
-            var linksApps = containerApps.Descendants("a")
-                                    .Where(a => a.GetAttributeValue("class", string.Empty)
-                                    .Contains("more"))
-                                    .Select(l => l.GetAttributeValue("href", string.Empty));
+            var linksApps = containerApps
+                                .Descendants("ul")
+                                .FirstOrDefault()
+                                .Descendants("a")
+                                .Where(a => a.GetAttributeValue("class", string.Empty)
+                                .Contains("more"))
+                                .Select(u => u.GetAttributeValue("href", string.Empty));                                    
 
             var idCurrentApp = ExtractIdFromAppUrl(appUrl);
 
-            int positionApp = 1;
+            int positionApp = -1;
             for (int i = 0; i < linksApps.Count(); i++)
             {
-                if (ExtractIdFromAppUrl(linksApps.ElementAt(i)) == idCurrentApp)
+                var idApp = ExtractIdFromAppUrl(linksApps.ElementAt(i));
+                if (idApp == idCurrentApp)
                 {
                     positionApp = i + 1;
                     break;
@@ -141,7 +147,7 @@ namespace Robot.AppStore.iTunes.GetApp
             var urlSplited = appUrl.Split('/');
             var idWithParametersUrl = urlSplited[urlSplited.Length - 1];
 
-            var id = idWithParametersUrl.Remove(idWithParametersUrl.IndexOf("?"), idWithParametersUrl.Length);
+            var id = idWithParametersUrl.Split('?')[0];
 
             return id;
         }

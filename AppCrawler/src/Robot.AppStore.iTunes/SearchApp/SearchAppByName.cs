@@ -15,7 +15,8 @@ namespace Robot.AppStore.iTunes.SearchApp
         }
 
         public IEnumerable<App> Search(string q, string country)
-        {   if (IsNotALink(q))
+        {
+            if (IsNotALink(q))
                 q = $"http://www.apple.com/{country}/search/{q}?src=serp";
 
             return SearchApp?.Search(q, country);
