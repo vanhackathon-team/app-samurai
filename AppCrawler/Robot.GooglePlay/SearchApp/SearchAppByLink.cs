@@ -4,14 +4,12 @@ using Domain.Interfaces;
 using HtmlAgilityPack;
 using System.Linq;
 using System;
+using Robot.GooglePlay.Helpers;
 
 namespace Robot.GooglePlay.SeachApp
 {
     public class SearchAppByLink : ISearchApp
     {
-
-        const string APP_URL = "https://play.google.com/store/apps/category/{category}/collection/topselling_free";
-
         public ISearchApp SearchApp { get; }
 
         public SearchAppByLink(ISearchApp searchApp)
@@ -57,11 +55,9 @@ namespace Robot.GooglePlay.SeachApp
 
                 for (int index = 0; index < names.Length; index++)
                 {
-                    string rating = ratings[index].GetAttributeValue("style", string.Empty);
-                    if (rating == string.Empty)
-                        rating = "";
-                    else
-                        rating = rating.Split(':')[1].Replace("%", "").Replace(";", "");
+                    string rating = GooglePlayUtils.GetRating(
+                            ratings[index].GetAttributeValue("style", string.Empty)
+                    );
 
                     App app = new App()
                     {

@@ -1,4 +1,7 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Domain.Interfaces;
+using Microsoft.AspNetCore.Mvc;
+using Robot.AppStore.iTunes.GetApp;
+using Robot.AppStore.iTunes.SearchApp;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,6 +13,8 @@ namespace Web.Controllers
     {
         public IActionResult Index()
         {
+
+
             return View();
         }
     }
