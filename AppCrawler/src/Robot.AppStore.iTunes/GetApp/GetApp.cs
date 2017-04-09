@@ -49,16 +49,11 @@ namespace Robot.AppStore.iTunes.GetApp
                     Description = appDescription,
                     Icon = appImageLink,
                     Link = urlApp,
-                    Screenshots = screenshots,
-                    RankingCategory = FillRankingCategory(containerResult, country)
+                    Screenshots = screenshots
                 };
             }
             return null;
         }
-
-        private IDictionary<string, int> FillRankingCategory(HtmlNode doc, string country)
-        {
-            return null;
-        }
+        
     }
 }

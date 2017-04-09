@@ -1,20 +1,21 @@
-﻿using System;
+﻿using Domain.Interfaces;
 using System.Collections.Generic;
 using Domain.Entities;
-using Domain.Interfaces;
+using HtmlAgilityPack;
 using Domain;
+using System;
 
-namespace Robot.AppStore.iTunes.SearchApp
+namespace Robot.GooglePlay.SeachApp
 {
-    public class SearchAppByName : BaseSearchAppByName
+    class SearchAppByName : BaseSearchAppByName
     {
         public SearchAppByName(ISearchApp searchApp) : base(searchApp)
-        {            
+        {
         }
 
         protected override string getSearchUrl(string q, string country)
         {
-            return $"http://www.apple.com/{country}/search/{q}?src=serp";
+            return $"https://play.google.com/store/search?q={a}&hl={country}";            
         }
     }
 }
