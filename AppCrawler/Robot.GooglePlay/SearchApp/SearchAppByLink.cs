@@ -67,7 +67,7 @@ namespace Robot.GooglePlay.SeachApp
                     {
                         Name = names[index].InnerText,
                         SubTitle = subtitles[index].InnerText,
-                        //Price = prices[index].InnerText,
+                        Price = prices.Length != 0 ? prices[index].InnerText : string.Empty,
                         Description = descriptions[index].InnerText,
                         Package = names[index].GetAttributeValue("href", string.Empty).Split('=')[1],
                         Rating = rating

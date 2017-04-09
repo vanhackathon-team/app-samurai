@@ -9,25 +9,34 @@ using HtmlAgilityPack;
 
 namespace Robot.GooglePlay.GetApp
 {
-    class GetApp : IGetApp
+    public class GetApp : IGetApp
     {
-        public App Get(string urlApp, string country)
+        public App Get(string id, string country)
         {
             HtmlWeb web = new HtmlWeb();
-            HtmlDocument html = web.Load(urlApp);
+
+            string url = $"https://play.google.com/store/apps/details?id={id}&gl={country}";
+            HtmlDocument html = web.Load(url);
             
             string divClass = "details-wrapper apps square-cover id-track-partial-impression id-deep-link-item";
             var divs = GetNode(html.DocumentNode, "div", "class", divClass);
 
             App app = new App()
             {
+                Package = id,
+
                 Name = GetNode(divs, "div", "class", "id-app-title").InnerText,
+
                 SubTitle = GetNode(divs, "span", "itemprop", "name").InnerText,
+
                 Description = GetNode(divs, "div", "jsname", "C4s9Ed").InnerText,
+
                 Icon = GetNode(divs, "img", "class", "cover-image")
-                    .GetAttributeValue("src", string.Empty),                
+                    .GetAttributeValue("src", string.Empty),   
+                
                 Category = GetNode(divs, "a", "class", "document-subtitle category")
                     .GetAttributeValue("href", string.Empty).Split('/')[3],
+
                 Screenshots = GetNode(divs, "div", "class", "thumbnails")
                     .Descendants("img")
                     .Select(ts => ts.GetAttributeValue("src", string.Empty))

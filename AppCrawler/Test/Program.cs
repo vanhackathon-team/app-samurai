@@ -6,7 +6,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-
+using Robot.GooglePlay;
+using Robot.GooglePlay.GetApp;
 
 namespace Test
 {
@@ -18,14 +19,26 @@ namespace Test
             Console.WriteLine("Starting ...\n");
             Console.WriteLine("============================================");
 
-            ISearchApp robot = new SearchAppByName(new SearchAppByLink(null));
+            /*ISearchApp robot = new SearchAppByName(new SearchAppByLink(null));
 
-            IEnumerable<App> apps = robot.Search("whatsapp", "pt");
+            IEnumerable<App> apps = robot.Search("whatsapp", "en");
             foreach (var app in apps)
                 Console.WriteLine(app);
+            */
+
+            IGetApp robotApp = new GetApp();
+
+            App app = robotApp.Get("com.whatsapp", "br");
+            Console.WriteLine(app);
+
+            foreach (string url in app.Screenshots)
+                Console.WriteLine(url);
 
             Console.WriteLine("============================================");
             Console.WriteLine("\nEnd!");
+
+            //com.whatsapp
+            
             Console.ReadKey();
         }
 
