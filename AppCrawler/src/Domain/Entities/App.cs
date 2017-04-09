@@ -44,7 +44,7 @@ namespace Domain.Entities
                 + "PositionOverall: " + PositionOverall + "\n "
                 + "Icon: " + Icon + "\n "
                 + "Link: " + Link + "\n "
-                + "Screenshots: " + Screenshots + "\n ";
+                + "Category: " + Category + "\n ";
         }
     }
 }

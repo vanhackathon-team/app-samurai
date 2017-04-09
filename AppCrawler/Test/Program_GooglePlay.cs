@@ -13,7 +13,7 @@ namespace Test
 {
     class Program_GooglePlay
     {
-        public static void MainTest(string[] args)
+        public static void Main(string[] args)
         {
 
             Console.WriteLine("Starting ...\n");
@@ -28,7 +28,7 @@ namespace Test
 
             IGetApp robotApp = new GetApp();
 
-            App app = robotApp.Get("com.whatsapp", "br");
+            App app = robotApp.Get("org.mozilla.firefox", "pt");
             Console.WriteLine(app);
 
             foreach (string url in app.Screenshots)

@@ -9,7 +9,7 @@ namespace Test
 {
     class Program_AppStore
     {
-        public static void Main(string[] args)
+        public static void MainTeste(string[] args)
         {
             ISearchApp searchApp = new SearchAppByName(new SearchAppByLink(null));
             IGetApp getApp = new GetApp();
