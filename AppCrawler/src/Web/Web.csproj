@@ -11,6 +11,12 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Content Include="wwwroot\css\materialize.min.css" />
+    <Content Include="wwwroot\Index.cshtml" />
+    <Content Include="wwwroot\js\materialize.min.js" />
+  </ItemGroup>
+
+  <ItemGroup>
     <None Include="wwwroot\css\styles.css" />
     <None Include="wwwroot\images\AppApple.png" />
     <None Include="wwwroot\images\AppGoogle.png" />
@@ -30,6 +36,11 @@
     <PackageReference Include="Microsoft.Extensions.Logging.Debug" Version="1.0.2" />
     <PackageReference Include="Microsoft.VisualStudio.Web.BrowserLink" Version="1.0.1" />
     <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="1.0.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Domain\Domain.csproj" />
+    <ProjectReference Include="..\Robot.AppStore.iTunes\Robot.AppStore.iTunes.csproj" />
   </ItemGroup>
 
 </Project>
