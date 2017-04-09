@@ -1,9 +1,9 @@
-﻿using System;
-using Domain.Entities;
+﻿using Domain.Entities;
 using Domain.Interfaces;
 using HtmlAgilityPack;
 using System.Linq;
 using System.Collections.Generic;
+using Robot.AppStore.iTunes.Helpers;
 
 namespace Robot.AppStore.iTunes.GetApp
 {
@@ -11,8 +11,10 @@ namespace Robot.AppStore.iTunes.GetApp
     {
         public App Get(string urlApp, string country)
         {
-            HtmlWeb web = new HtmlWeb();  
-            HtmlDocument doc = web.Load(urlApp);
+            HtmlWeb web = new HtmlWeb();
+
+            string urlAppWithCountry = AppUrl.GetUrlWithCountry(urlApp, country);
+            HtmlDocument doc = web.Load(urlAppWithCountry);
 
             var containerResult = doc.DocumentNode
                 .Descendants("div")
@@ -49,11 +51,18 @@ namespace Robot.AppStore.iTunes.GetApp
                     Description = appDescription,
                     Icon = appImageLink,
                     Link = urlApp,
-                    Screenshots = screenshots
+                    Screenshots = screenshots,
+                    RankingCategory = FillRankingCategory(containerResult, urlApp),
+                    PositionOverall = FillPositionOverall(urlApp, country)
                 };
             }
+
             return null;
         }
-        
+
+        private IDictionary<string, int> FillRankingCategory(HtmlNode doc, string country)
+        {
+            return null;
+        }
     }
 }
