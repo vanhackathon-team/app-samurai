@@ -21,5 +21,25 @@ namespace Domain.Entities
         public IList<string> Screenshots { get; set; }
 
         public string Link { get; set; }
+                
+        public string SubTitle { get; set; }
+
+        public string Rating { get; set; }
+        
+        public string Price { get; set; }
+
+        public string Package { get; set; }
+
+        public string Category { get; set; }
+
+        public override string ToString()
+        {
+            return "\n Title: " + Name + "\n "
+                + "SubTitle: " + SubTitle + "\n "
+                + "Description: " + Description + "\n "
+                + "Rating: " + Rating + "\n "
+                + "Price: " + Price + "\n "
+                + "Package: " + Package + "\n ";
+        }
     }
 }

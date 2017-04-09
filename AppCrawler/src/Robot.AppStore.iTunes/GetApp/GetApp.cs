@@ -62,7 +62,7 @@ namespace Robot.AppStore.iTunes.GetApp
             return null;
         }
 
-        private int FillRankingCategory(HtmlNode node, string urlApp)
+        private IDictionary<string, int> FillRankingCategory(HtmlNode doc, string country)
         {
             var urlCategory = node
                     .Descendants("div")
