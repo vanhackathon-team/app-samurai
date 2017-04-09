@@ -45,7 +45,6 @@
   <ItemGroup>
     <Compile Include="GetApp\GetApp.cs" />
     <Compile Include="Helpers\AppUrl.cs" />
-    <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SearchApp\SearchAppByLink.cs" />
     <Compile Include="SearchApp\SearchAppByName.cs" />
