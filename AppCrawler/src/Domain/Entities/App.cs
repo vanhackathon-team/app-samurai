@@ -13,7 +13,6 @@ namespace Domain.Entities
         public string Description { get; set; }
 
         private string icon;
-        private string rating;
 
         public string Icon
         {
@@ -40,30 +39,16 @@ namespace Domain.Entities
                 
         public string SubTitle { get; set; }
 
-        //public string Rating
-        //{
-        //    get { return FixRating(rating); }
-        //    set { rating = value; }
-        //}
         public string Rating { get; set; }
-
+        
         public string Price { get; set; }
 
         public string Package { get; set; }
 
         public string Category { get; set; }
 
-        private static string FixRating(string rating)
-        {
-            double result = Convert.ToDouble(rating);
-            result = Math.Round((result * 5) / 100, 1);
-
-            return result.ToString();
-        }
-
         public override string ToString()
         {
-
             return "\n Title: " + Name + "\n "
                 + "SubTitle: " + SubTitle + "\n "
                 + "Description: " + Description + "\n "

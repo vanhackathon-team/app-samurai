@@ -56,11 +56,9 @@ namespace Robot.GooglePlay.SearchApp
 
                 for (int index = 0; index < names.Length; index++)
                 {
-                    string rating = "0";
-                    if (ratings.Length>0)
-                        rating = GooglePlayUtils.GetRating(
-                                ratings[index].GetAttributeValue("style", string.Empty)
-                        );
+                    string rating = GooglePlayUtils.GetRating(
+                            ratings[index].GetAttributeValue("style", string.Empty)
+                    );
 
                     App app = new App()
                     {
