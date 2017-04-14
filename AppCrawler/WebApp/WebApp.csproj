@@ -6,13 +6,41 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Content Include="wwwroot\css\materialize.min.css" />
-    <Content Include="wwwroot\css\styles.css" />
+    <Compile Remove="wwwroot\images\images\**" />
+    <Content Remove="wwwroot\images\images\**" />
+    <EmbeddedResource Remove="wwwroot\images\images\**" />
+    <None Remove="wwwroot\images\images\**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Include="wwwroot\css\bootstrap-grid.css" />
+    <Content Include="wwwroot\css\bootstrap-grid.css.map" />
+    <Content Include="wwwroot\css\bootstrap-grid.min.css" />
+    <Content Include="wwwroot\css\bootstrap-grid.min.css.map" />
+    <Content Include="wwwroot\css\bootstrap-reboot.css" />
+    <Content Include="wwwroot\css\bootstrap-reboot.css.map" />
+    <Content Include="wwwroot\css\bootstrap-reboot.min.css" />
+    <Content Include="wwwroot\css\bootstrap-reboot.min.css.map" />
+    <Content Include="wwwroot\css\bootstrap-theme.css" />
+    <Content Include="wwwroot\css\bootstrap-theme.css.map" />
+    <Content Include="wwwroot\css\bootstrap-theme.min.css" />
+    <Content Include="wwwroot\css\bootstrap-theme.min.css.map" />
+    <Content Include="wwwroot\css\bootstrap.css" />
+    <Content Include="wwwroot\css\bootstrap.css.map" />
+    <Content Include="wwwroot\css\bootstrap.min.css" />
+    <Content Include="wwwroot\css\bootstrap.min.css.map" />
+    <Content Include="wwwroot\fonts\glyphicons-halflings-regular.eot" />
+    <Content Include="wwwroot\fonts\glyphicons-halflings-regular.svg" />
+    <Content Include="wwwroot\fonts\glyphicons-halflings-regular.ttf" />
+    <Content Include="wwwroot\fonts\glyphicons-halflings-regular.woff" />
+    <Content Include="wwwroot\fonts\glyphicons-halflings-regular.woff2" />
     <Content Include="wwwroot\images\AppApple.png" />
     <Content Include="wwwroot\images\AppGoogle.png" />
-    <Content Include="wwwroot\images\images\AppApple.png" />
-    <Content Include="wwwroot\images\images\AppGoogle.png" />
-    <Content Include="wwwroot\js\materialize.min.js" />
+    <Content Include="wwwroot\js\bootstrap.js" />
+    <Content Include="wwwroot\js\bootstrap.min.js" />
+    <Content Include="wwwroot\js\ie10-viewport-bug-workaround.js" />
+    <Content Include="wwwroot\js\jquery-3.1.1.slim.min.js" />
+    <Content Include="wwwroot\js\tether.min.js" />
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="Microsoft.ApplicationInsights.AspNetCore" Version="2.0.0" />
