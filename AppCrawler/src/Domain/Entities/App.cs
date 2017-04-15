@@ -8,9 +8,22 @@ namespace Domain.Entities
 {
     public class App
     {
+
+        private const int LIMIT_DESCRIPTION = 20, LIMIT_TITLE = 20;
+
         public string Name { get; set; }
 
+        public string ReducedName { get {
+                return GetReducedContent(Name, LIMIT_TITLE);
+            }
+        }
+
         public string Description { get; set; }
+
+        public string ReducedDescription { get {
+                return GetReducedContent(Description, LIMIT_DESCRIPTION);
+            }
+        }
 
         private string icon;
 
@@ -27,8 +40,7 @@ namespace Domain.Entities
             }
             set { icon = value; }
         }
-
-
+        
         public int RankingCategory { get; set; }
 
         public int PositionOverall { get; set; }
@@ -46,6 +58,14 @@ namespace Domain.Entities
         public string Package { get; set; }
 
         public string Category { get; set; }
+
+        private string GetReducedContent(string data, int limit) {
+
+            if (data.Length > limit)
+                return data.Substring(0, limit-4) + " ...";
+            else
+                return data;
+        }
 
         public override string ToString()
         {

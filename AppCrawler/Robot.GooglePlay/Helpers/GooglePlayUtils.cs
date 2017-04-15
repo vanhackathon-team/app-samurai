@@ -32,7 +32,12 @@ namespace Robot.GooglePlay.Helpers
             double result = Convert.ToDouble(rating);
             result = Math.Round((result * 5) / 100, 1);
 
-            return result.ToString();
+            rating = result.ToString();
+
+            if (!rating.Contains('.'))
+                rating += ".0";
+                
+            return rating;
         }
 
     }
