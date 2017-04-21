@@ -21,8 +21,7 @@ namespace Robot.GooglePlay.GetApp
             
             string divClass = "details-wrapper apps square-cover id-track-partial-impression id-deep-link-item";
             var divs = GetNode(html.DocumentNode, "div", "class", divClass);
-
-
+            
             App app = new App()
             {
                 Package = id,
