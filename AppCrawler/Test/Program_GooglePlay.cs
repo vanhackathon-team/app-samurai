@@ -36,8 +36,6 @@ namespace Test
 
             Console.WriteLine("============================================");
             Console.WriteLine("\nEnd!");
-
-            //com.whatsapp
             
             Console.ReadKey();
         }
