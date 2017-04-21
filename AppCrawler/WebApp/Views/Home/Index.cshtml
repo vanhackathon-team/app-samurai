@@ -1,46 +1,46 @@
 ﻿@using Domain.Entities;
 @model IEnumerable<Domain.Entities.App>
 
+<form asp-action="Index" asp-controller="HomeController">
 
-@*<div class="card-deck">
-    @{ 
-        if (Model != null) {
-            foreach (var item in Model) {
-                <div class="card z-depth-5" style="width: auto; height: 200px; margin-bottom: 15px;">
-                    <img class="card-img-top rounded-circle" style=" width: 100px; height: auto ; align-self: center" 
-                         src="@Html.DisplayFor(modelItem => item.Icon)" alt="">
-                    <div class="card-block" style="padding: 5px;">
-                        <div class="clearfix">
-                            <p class="float-left">@Html.DisplayFor(modelItem => item.ReducedName)</p>
-                            <p class="float-right"> @Html.DisplayFor(modelItem => item.Rating)</p>
-                        </div>                       
-                    </div>               
-                </div>
-            }
-        }
-    }
-</div>*@
+    <div class="input-group" data-toggle="buttons">
 
-<div class="list-group">
+        <label class="btn btn-secondary active" style="margin-bottom: 0px; margin-right: 5px;">
+            <input type="radio" name="rb_google_play" id="option3" autocomplete="off"> Google Play
+        </label>
+
+        <label class="btn btn-secondary" style="margin-bottom: 0px; margin-right: 10px;">
+            <input type="radio" name="rb_apple" id="option3" autocomplete="off"> Apple
+        </label>
+
+        <input type="text" class="form-control" placeholder="Search for...">
+
+        <span class="input-group-btn">
+            <button class="btn btn-secondary" type="submit">Go!</button>
+        </span>
+
+    </div>
+
+</form>
+
+<div class="row">
+
     @{
         if (Model != null)
         {
             foreach (var item in Model)
             {
-                <a href="#" class="list-group-item list-group-item-action flex-column align-items-start">                                        
-                    <div class="d-flex w-100 justify-content-between">
-                        <div class="clearfix">
-                            <img class="rounded float-left" style=" width: 100px; height: auto ; margin-bottom: 10px;"
-                                 src="@Html.DisplayFor(modelItem => item.Icon)" alt="" />
-                            
-                            <h5 class="mb-1">@Html.DisplayFor(modelItem => item.Name)</h5>                        
-                        </div>                        
-                        <h1>@Html.DisplayFor(modelItem => item.Rating)</h1>
-                    </div>
-                    <p class="mb-1">@Html.DisplayFor(modelItem => item.SubTitle)</p>
-                    <small>@Html.DisplayFor(modelItem => item.Description)</small>
-                </a>            
+                <div class="col-md-4">
+                    <img class="rounded-circle" src="@Html.DisplayFor(modelItem => item.Icon)" alt="Generic placeholder image" width="140" height="140">
+                    <h2>@Html.DisplayFor(modelItem => item.Name)</h2>
+                    <p style="margin-bottom: 0px;">@Html.DisplayFor(modelItem => item.SubTitle)  @Html.DisplayFor(modelItem => item.Rating)</p>                    
+                    <small style="margin-bottom: 10px; margin-top: 0px;">@Html.DisplayFor(modelItem => item.Description)</small>
+                    <p style="margin-top: 10px;"><a class="btn btn-secondary" href="#" role="button">View details &raquo;</a></p>
+                </div>                
             }
         }
     }
+    
 </div>
+
+
