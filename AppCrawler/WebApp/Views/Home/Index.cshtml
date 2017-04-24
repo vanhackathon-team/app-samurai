@@ -1,7 +1,8 @@
 ﻿@using Domain.Entities;
 @model IEnumerable<Domain.Entities.App>
 
-<form asp-action="Index" asp-controller="HomeController">
+
+@*<form asp-action="Index" asp-controller="Home" method="get" onsubmit="myFunction()">
 
     <div class="input-group" data-toggle="buttons">
 
@@ -13,15 +14,39 @@
             <input type="radio" name="rb_apple" id="option3" autocomplete="off"> Apple
         </label>
 
-        <input type="text" class="form-control" placeholder="Search for...">
+        <input type="text" class="form-control" name="p" value="g">        
+        <input type="text" class="form-control" name="q" value="whatsapp" placeholder="Search for...">
+        <input type="text" class="form-control" name="c" value="us">
 
         <span class="input-group-btn">
             <button class="btn btn-secondary" type="submit">Go!</button>
         </span>
-
+       
     </div>
 
-</form>
+</form>*@
+
+
+<div class="input-group" data-toggle="buttons">
+
+    <label class="btn btn-secondary active" style="margin-bottom: 0px; margin-right: 5px;" onclick="toggleMarketPlace('g');">
+        <input type="radio" name="rb_google_play" id="option3" autocomplete="off"> Google Play
+    </label>
+
+    <label class="btn btn-secondary" style="margin-bottom: 0px; margin-right: 10px;" onclick="toggleMarketPlace('a');">
+        <input type="radio" name="rb_apple" id="option3" autocomplete="off"> Apple
+    </label>
+        
+    <input id="txt_search" type="text" class="form-control" name="q" value="whatsapp" placeholder="Search for...">
+    <input type="text" class="form-control" name="c" value="us">
+
+    <span class="input-group-btn">
+        <button class="btn btn-secondary" onclick="onSearch();">Go!</button>
+    </span>
+
+</div>
+
+<br />
 
 <div class="row">
 
@@ -34,8 +59,13 @@
                     <img class="rounded-circle" src="@Html.DisplayFor(modelItem => item.Icon)" alt="Generic placeholder image" width="140" height="140">
                     <h2>@Html.DisplayFor(modelItem => item.Name)</h2>
                     <p style="margin-bottom: 0px;">@Html.DisplayFor(modelItem => item.SubTitle)  @Html.DisplayFor(modelItem => item.Rating)</p>                    
-                    <small style="margin-bottom: 10px; margin-top: 0px;">@Html.DisplayFor(modelItem => item.Description)</small>
-                    <p style="margin-top: 10px;"><a class="btn btn-secondary" href="#" role="button">View details &raquo;</a></p>
+                    <small style="margin-bottom: 10px; margin-top: 0px;">
+                        @Html.DisplayFor(modelItem => item.ReducedDescription) 
+                    </small>
+                    @if (@Html.DisplayFor(modelItem => item.ReducedDescription).ToString() != string.Empty) { 
+                        <br />
+                    }
+                    <p style="margin-top: 10px;"><a class="btn btn-secondary" onclick="onSearchDetails('@Html.DisplayFor(modelItem => item.Package)');" role="button">View details &raquo;</a></p>
                 </div>                
             }
         }
@@ -43,4 +73,34 @@
     
 </div>
 
+<script>
 
+    var p = "g";
+    var c = "us";
+    
+    function toggleMarketPlace(data) {
+        p = data;
+    }
+
+    function toggleCountry(data) {
+        c = data;
+    }
+
+    function onSearch() {         
+        var element = document.getElementById('txt_search');
+        location.href = '?p=' + p + '&q=' + element.value + '&c=' + c;
+    }
+
+    document.getElementById("txt_search")
+        .addEventListener("keyup", function (event) {
+            event.preventDefault();
+            if (event.keyCode == 13) {
+                onSearch();
+            }
+        });
+
+    function onSearchDetails(data) {        
+        location.href = 'Home/Details?p=' + p + '&q=' + data + '&c=' + c;
+    }
+
+</script>

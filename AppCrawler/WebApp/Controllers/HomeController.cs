@@ -57,14 +57,14 @@ namespace WebApp.Controllers
             if(p == string.Empty || ( p != "g" && p != "a"))
                 return View();
 
-            IGetApp app;
+            IGetApp getApp;
 
             if (p == "g")
-                app = new Robot.GooglePlay.GetApp.GetApp();
+                getApp = new Robot.GooglePlay.GetApp.GetApp();
             else
-                app = new Robot.AppStore.iTunes.GetApp.GetApp();
-            
-            app.Get(q, c);
+                getApp = new Robot.AppStore.iTunes.GetApp.GetApp();
+
+            var app = getApp.Get(q, c);
 
             ViewBag.p = p;
             ViewBag.q = q;

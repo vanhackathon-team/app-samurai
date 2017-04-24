@@ -9,7 +9,7 @@ namespace Domain.Entities
     public class App
     {
 
-        private const int LIMIT_DESCRIPTION = 20, LIMIT_TITLE = 20;
+        private const int LIMIT_SHORT_DESCRIPTION = 40, LIMIT_TITLE = 20;
 
         public string Name { get; set; }
 
@@ -21,7 +21,7 @@ namespace Domain.Entities
         public string Description { get; set; }
 
         public string ReducedDescription { get {
-                return GetReducedContent(Description, LIMIT_DESCRIPTION);
+                return GetReducedContent(Description, LIMIT_SHORT_DESCRIPTION);
             }
         }
 
@@ -61,8 +61,14 @@ namespace Domain.Entities
 
         private string GetReducedContent(string data, int limit) {
 
-            if (data.Length > limit)
-                return data.Substring(0, limit-4) + " ...";
+            if (data.Length > limit) { 
+                data = data.Substring(0, limit - 4) + " ...";
+
+                if (data.Length < LIMIT_SHORT_DESCRIPTION)
+                    data = data.PadRight(LIMIT_SHORT_DESCRIPTION - data.Length);
+
+                return data;
+                }
             else
                 return data;
         }
