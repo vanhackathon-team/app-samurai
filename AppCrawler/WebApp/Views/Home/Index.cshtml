@@ -200,8 +200,8 @@
 
 <script>
 
-    var p = "g";
-    var c = "us";
+    var p = "@ViewBag.p?.ToString().toLower()";
+    var c = "@ViewBag.c?.ToString().toLower()";
 
     function toggleMarketPlace(data) {
         p = data;        
@@ -229,18 +229,6 @@
                 onSearch();
             }
         });
-
-    document.addEventListener("DOMContentLoaded", function () {
-
-        // Loads the defaults values.
-
-        if (document.getElementById('rb_apple').className.toString().search('active') > -1)
-            p = "a";
-        else
-            p = "g";
-
-        c = document.getElementById("mTextCountry").value.toLowerCase();        
-    });
 
 </script>
 
