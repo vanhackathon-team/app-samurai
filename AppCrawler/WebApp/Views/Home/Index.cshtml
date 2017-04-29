@@ -162,7 +162,7 @@
     
 <div class="input-group" data-toggle="buttons" style="margin-bottom: 10px;">
 
-    <input id="txt_search" type="text" class="form-control" placeholder="Search for..." value="@ViewBag.q">
+    <input id="mTextSearch" type="text" class="form-control" placeholder="Search for..." value="@ViewBag.q">
 
     <span class="input-group-btn">
         <button class="btn btn-secondary" onclick="onSearch();">Go!</button>
@@ -200,35 +200,39 @@
 
 <script>
 
-    var p = "@ViewBag.p?.ToString().toLower()";
-    var c = "@ViewBag.c?.ToString().toLower()";
-
+    var p = "@ViewBag.p?.ToString().ToLower()";
+    var c = "@ViewBag.c?.ToString().ToLower()";
+    
     function toggleMarketPlace(data) {
         p = data;        
     }
 
     function onSearch() {
-        var txt_search = document.getElementById('txt_search').value.toLowerCase();
+        var txtSearch = document.getElementById('mTextSearch').value.toLowerCase();
         var country = document.getElementById("mTextCountry").value.toLowerCase();
 
         if (country.trim().length == 0)
             country = "us";
                 
-        location.href = '?p=' + p + '&q=' + txt_search + '&c=' + country;
+        location.href = '?p=' + p + '&q=' + txtSearch + '&c=' + country;
     }
 
     function onSearchDetails(data) {
                
-        location.href = 'Home/Details?p=' + p + '&q=' + data + '&c=' + country;
+        location.href = 'Home/Details?p=' + p + '&q=' + data + '&c=' + c;
     }
 
-    document.getElementById("txt_search")
+    document.getElementById("mTextSearch")
         .addEventListener("keyup", function (event) {
             event.preventDefault();
             if (event.keyCode == 13) {
                 onSearch();
             }
         });
+        
+    if (p == "") { 
+        p = 'g';
+    }
 
 </script>
 
