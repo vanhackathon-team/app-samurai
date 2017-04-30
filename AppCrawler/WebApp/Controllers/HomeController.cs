@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 using Domain.Interfaces;
 using Robot;
 using Domain.Entities;
+using Domain.Helpers;
 
 namespace WebApp.Controllers
 {
@@ -14,7 +15,7 @@ namespace WebApp.Controllers
         [HttpGet]
         public IActionResult Index(string p, string q, string c)
         {
-            if (p == string.Empty || (p != "g" && p != "a"))
+            if (q == string.Empty || (p != "g" && p != "a"))
                 return View(null);
 
             ISearchApp searchApp;
@@ -28,7 +29,7 @@ namespace WebApp.Controllers
                     .AppStore.iTunes.SearchApp.SearchAppByName
                     (new Robot.AppStore.iTunes.SearchApp.SearchAppByLink(null));
 
-            IEnumerable<App> searchResult = searchApp.Search(q, c);
+            IEnumerable<App> searchResult = searchApp.Search(Utils.FixSeachLink(q), c);
 
             ViewBag.p = p;
             ViewBag.q = q;
@@ -54,8 +55,8 @@ namespace WebApp.Controllers
         [HttpGet]
         public IActionResult Details(string p, string q, string c)
         {
-            if(p == string.Empty || ( p != "g" && p != "a"))
-                return View();
+            if(q == string.Empty || ( p != "g" && p != "a"))
+                return RedirectToAction("Index","Home");
 
             IGetApp getApp;
 

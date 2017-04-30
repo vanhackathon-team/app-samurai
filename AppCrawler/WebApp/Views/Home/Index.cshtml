@@ -215,11 +215,17 @@
             country = "us";
                 
         location.href = '?p=' + p + '&q=' + txtSearch + '&c=' + country;
+        console.log(location.href);
     }
 
     function onSearchDetails(data) {
-               
-        location.href = 'Home/Details?p=' + p + '&q=' + data + '&c=' + c;
+
+        var url = 'Details?p=' + p + '&q=' + data + '&c=' + c;
+
+        if (window.location.href.toString().toLowerCase().search("home") < 0)
+            url = 'Home/' + url;
+
+        location.href = url;
     }
 
     document.getElementById("mTextSearch")

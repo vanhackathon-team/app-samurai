@@ -41,6 +41,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Entities\Menu.cs" />
+    <Compile Include="Helpers\Utils.cs" />
     <Compile Include="SearchApp\BaseSearchAppByName.cs" />
     <Compile Include="Entities\App.cs" />
     <Compile Include="Interfaces\IGetApp.cs" />

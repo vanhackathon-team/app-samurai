@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Domain.Helpers;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -58,6 +59,12 @@ namespace Domain.Entities
         public string Package { get; set; }
 
         public string Category { get; set; }
+        
+        public string CategoryCapitalized
+        {
+            get { return Utils.CapitalizeText(Category); }            
+        }
+
 
         private string GetReducedContent(string data, int limit) {
 
